@@ -1,0 +1,57 @@
+#login-page h1{
+	margin-top: 12%;
+	margin-left: 30%;
+	font-size: 160px;
+	line-height: 120%;
+	color: #9ccad3;
+	font-family: 'Text Me One', sans-serif;
+	margin-bottom: 1%;
+
+}
+
+#login-page img{
+	float: left;
+}
+
+#login-page .colorLogo{
+	height: 100px;
+	width: auto;
+	background-image: url(../images/Colored_logo.png);
+}
+
+#login-page #fb_login {
+	margin-top: 2%;
+	margin-left: 30%;
+font-family: font-family: 'Droid Serif', serif;
+display: -moz-inline-stack;
+display: inline-block;
+vertical-align: middle;
+zoom: 1;
+border: 1px solid #fb5500;
+background: #fb5500;
+padding: 11px 20px;
+font-size: 30px;
+color: #fff;
+text-shadow: rgba(0,0,0,0.35) 0 -1px 0;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+-ms-border-radius: 3px;
+-o-border-radius: 3px;
+border-radius: 3px;
+-webkit-box-shadow: rgba(255,255,255,0.2) 0 1px 0,inset rgba(255,255,255,0.2) 0 1px 0;
+-moz-box-shadow: rgba(255,255,255,0.2) 0 1px 0,inset rgba(255,255,255,0.2) 0 1px 0;
+box-shadow: rgba(255,255,255,0.2) 0 1px 0,inset rgba(255,255,255,0.2) 0 1px 0;
+   }
+
+#login-page #fb_login:hover {
+border: 1px solid #d72c3f;
+   border-top-color: #d72c3f;
+   background: #d72c3f;
+   color: #fff;
+   cursor: pointer;
+   }
+#login-page #fb_login:active {
+   border-top-color: #fb5500;
+   background: #fb5500;
+   }
+

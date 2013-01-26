@@ -1,7 +1,15 @@
+html {
+	background-image: url(../images/background-repeat.png);
+}
+
 div.page {
 	display: none;
 }
 
 div.page.active {
 	display: block;
+}
+
+header {
+  height:100px;
 }

@@ -1,0 +1,45 @@
+body {
+	overflow: hidden;
+}
+
+#uploadImage, #addNote {
+	font-family: 'Open Sans';
+	font-size: 27px;
+	height: 40px;
+	width: 500px;
+	background-color: blue;
+	overflow: hidden;
+	position: absolute;
+	right: -380px;
+	display: inline-block;
+}
+
+#uploadImage {
+	top: 700px;
+}
+
+#addNote { 
+	top: 600px;
+}
+
+#uploadImage .visiblePart, #uploadImage form, #uploadImage #uploadDeets {
+	overflow: hidden;
+	display: inline-block;
+}
+
+#uploadImage .visiblePart {
+	width: 120px;
+}
+
+.visiblePart:hover {
+	cursor: pointer;
+}
+
+.visiblePart {
+	height: 40px;
+}
+
+#noteInfo {
+	display: block;
+}
+

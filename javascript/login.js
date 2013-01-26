@@ -1,11 +1,14 @@
 function loginUser(name, access_token, fb_url) {
-	$.ajax({
+	var user_id;
+  $.ajax({
 		url: "http://www.justingreet.com/WhatHappenedLastNight/php/submitLogin",
 		type: "post",
 		data: {name: name, fb_url: fb_url, access_token: access_token},
-		dataType: "text", 
+		dataType: "text",
+    async:false,
 		success: function(response, textStatus) {
 			console.log("Response is (drum roll...) " + response);
+      user_id = response;
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert("Error: " + textStatus + " type: " + errorThrown);
@@ -13,6 +16,7 @@ function loginUser(name, access_token, fb_url) {
 			console.log(jqXHR.statusText);
 		}
 	});
+  return user_id;
 }
 
 // Facebook SDK function - necessary for Facebook login
@@ -67,12 +71,12 @@ function login() {
     if (response.authResponse) {
       // connected
 	  var access_token = FB.getAuthResponse()['accessToken'];
-      getUserInfo(access_token);
+    getUserInfo(access_token);
   
     } else {
       // cancelled
     }
-  });
+  },{scope:'user_events,email'});
 }
 
 function getUserInfo(access_token) {
@@ -80,7 +84,7 @@ function getUserInfo(access_token) {
   
   FB.api('/me', function(response) {
     handleFacebookResponse(response,access_token);
-	console.log('Good to see you, ' + response.name + '.');
+	  console.log('Good to see you, ' + response.name + '.');
   });
 }
 
@@ -88,7 +92,9 @@ function handleFacebookResponse(response,access_token) {
   userInfo = [response.name, response.link];
 
   var id = loginUser(userInfo[0],access_token,userInfo[1]);
-  
+
   // Updating the CUR_USER global
   CUR_USER = new User(id,access_token,userInfo[0],userInfo[1]);
+  get_all_user_events();
+  switchPages("party-page");
 }

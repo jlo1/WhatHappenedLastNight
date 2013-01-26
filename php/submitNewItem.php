@@ -2,18 +2,14 @@
 	/* First get the variables passed to the function */
 	$eventID = intval($_POST["eventID"]);
 	$userID = intval($_POST["userID"]);
-	echo("First Content: " . $_POST["note"] . "\n");
 	// Must be a 1 or a 0
 	$isImage = intval($_POST["isImage"]);
-	echo ("isImage: " . $isImage . "\n");
 	$content = "\"" . "\"";
 	$timeCreated = "\"" . "\"";
 	$tempFileName = "\"" . "\"";
 	// If there's no image, there's text 
 	if ($isImage == 0) {
-		echo("No image\n");
 		$content = "\"" . $_POST["note"] . "\"";
-		echo("Content: " . $content . "\n");
 		$timeCreated = "\"" . $_POST["timeCreated"] . "\"";
 	}
 	else {
@@ -37,7 +33,6 @@
 		die("Can\'t select database: " . mysql_error());
 	}
 
-	echo ("isImage now: " . $isImage . "\n");
 	/* First make a new activity */
 	$item_entry = "INSERT INTO item VALUES(NULL, " . $eventID . ", " . $userID . ", " . $timeCreated . ", " . strval($isImage) . ", " . $content . ")";
 	$item_success = mysql_query($item_entry, $link);
@@ -48,7 +43,7 @@
 	}
 	/* If there's an image, we need to store it on the server and get the time it was created */
 	else {
-		echo("About to process image");
+		//echo("About to process image");
 		//This is the folder the image should be placed in
 		$destination_path = getcwd().DIRECTORY_SEPARATOR . "imageUploads" . DIRECTORY_SEPARATOR;
  
@@ -62,7 +57,14 @@
 	
 		//Actually upload the file
 		if(@move_uploaded_file($tempFileName, "imageUploads" . DIRECTORY_SEPARATOR . strval($new_item_id) . ".jpg")) {
-			echo("Uploaded the file\n");
+		}
+		
+		/* set the home image if this is the first one for the event */
+		$home_entry = "UPDATE event SET home_image = \"http://www.justingreet.com/WhatHappenedLastNight/php/imageUploads/" . strval($new_item_id) . ".jpg\" WHERE event_id = " . $eventID . " AND home_image IS NULL";
+		$home_result = mysql_query($home_entry, $link);
+		
+		if (!$home_result) {
+			die("Error updating home image source");
 		}
 		
 		//Get the time the photo was originally taken 
@@ -78,12 +80,10 @@
 		
 		$exif_ifdo = exif_read_data("imageUploads" . DIRECTORY_SEPARATOR . strval($new_item_id) . ".jpg", "IFDO", 0);
 		if (empty($exif_ifdo['DateTime'])) {
-			die("false");
+			die($new_item_id);
 		}
 		else {
-			echo("$exif_ifdo : " . $exif_ifdo . "\n");
 			$dateTime = $exif_ifdo['DateTime'];
-			echo("date time: " . $dateTime);
 			$change_dateTime = "UPDATE item SET time_created = " . "\"" . strval($dateTime) . "\"" . " WHERE item_id = " . $new_item_id;
 			$change_success = mysql_query($change_dateTime, $link);
 			
