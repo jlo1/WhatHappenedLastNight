@@ -1,6 +1,9 @@
 var submitted = false;
 
+var firstTime = true;
+
 $(document).ready(function() {
+	console.log("READY FIRED");
 	/*$("#button").click(function() {
 
 	});*/
@@ -30,9 +33,9 @@ $(document).ready(function() {
 		return false;
 	});*/
 	
-	login("Jay Shizzle", "1234", "jgreet.co.uk");
+	if (firstTime) signUpForEvent("It's a good life", "6:00pm on Sunday", "8:00pm on Sunday", "12345", "Time is Now", 5);
 	
-	$('#fileUpload').ajaxForm({ 
+	/*$('#fileUpload').ajaxForm({ 
 		beforeSubmit: ShowRequest,
 		success: SubmitSuccesful,
 		error: AjaxError                               
@@ -62,7 +65,7 @@ $(document).ready(function() {
         //var queryString = $.param(formData);
         // console.log('BeforeSend method: About to submit: ' + queryString);
         return true;
-	}
+	}*/
 
   
   
@@ -93,6 +96,8 @@ $(document).ready(function() {
 	function SubmitSuccesful(responseText, statusText) {      
 	  console.log(responseText);
 	}    
+	
+	firstTime = false;
 });
 
 function testEXIF() {
@@ -127,19 +132,3 @@ function submitAJAX(postOrGet, urlEnd, data) {
 }
 
 
-function submitNewActivityRequest() {
-	$.ajax({
-		url: "http://www.justingreet.com/Build18/php/submitNewActivity.php",
-		type: "post",
-		data: {task_description: task, users:users, timestamp: "7:00 on Tuesday"},
-		dataType: "text", 
-		success: function(response, textStatus) {
-			$("#stuff").html(response);
-		},
-		error: function(jqXHR, textStatus, errorThrown){
-			alert("Error: " + textStatus + " type: " + errorThrown);
-			console.log(textStatus);
-			console.log(jqXHR.statusText);
-		}
-	});
-}
