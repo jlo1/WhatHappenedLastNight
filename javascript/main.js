@@ -3,6 +3,17 @@ $(document).ready(function() {
 		login();
 	});
 	
+  $(".event-sidebar").click(function() {
+    if (EVENT_NOT_EXPANDED) {
+      $(".event-sidebar").animate({right: 0, height: 400, top: 200}, 1000);
+      EVENT_NOT_EXPANDED = false;
+    }
+    else {
+      $(".event-sidebar").animate({right: -380, height: 40, top: 600}, 1000);
+      EVENT_NOT_EXPANDED = true;
+    }
+  });
+  
 	$(".navBar ul li").bind("click", function() {
 		if (!IN_LOGOUT) {
 			$(".navBar ul li").animate({maxWidth: 200}, 500);
@@ -74,6 +85,7 @@ $(document).ready(function() {
 
 function switchPages(targetPageID) {
 	//Don't do anything if they want to navigate to the same page.
+  
 	if (targetPageID == CUR_NAV_ID) return;
 	
 	if (targetPageID == "login-page") $(".navBar").addClass("hideMe");
@@ -84,7 +96,10 @@ function switchPages(targetPageID) {
 	
 	var targetPage = "#" + targetPageID;
 	$(targetPage).addClass("active");
+  
 	CUR_NAV_ID = targetPageID;
+  
+  
 }
 	
 /* function to append data to the form before it gets sent */
