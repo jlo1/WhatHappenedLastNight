@@ -26,3 +26,5 @@ IN_LOGOUT = false;
 IMAGE_NOT_EXPANDED = true;
 
 NOTE_NOT_EXPANDED = true;
+
+EVENT_NOT_EXPANDED = false;

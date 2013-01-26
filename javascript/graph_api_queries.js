@@ -38,15 +38,18 @@ function display_all_user_events() {
     var d1 = document.createElement("span");
     d1.className = "event-name";
     $(d1).append(name);
+    $(d1).append("<br>");
     //var d2 = document.createElement("span");
     //d2.className = "description";
     //$(d2).append(description);
     var d3 = document.createElement("span");
     d3.className = "event-location";
     $(d3).append(loc);
+    $(d3).append("<br>");
     var d4 = document.createElement("span");
     d4.className = "event-date";
     $(d4).append(((new Date(start_time)).toLocaleDateString()));
+    $(d4).append("<br>");
     
     $(d).append(d1);
     //$(d).append(d2);
@@ -55,5 +58,32 @@ function display_all_user_events() {
     
     $(".event-sidebar").append(d);
     console.log("should have added");
+    
+    
+    $(".event-sidebar").click(function() {
+      if (EVENTS_NOT_EXPANDED) {
+        $(".event-sidebar").animate({right: 0, height: 400, top: 200}, 1000);
+        EVENTS_NOT_EXPANDED = false;
+      }
+      else {
+        $(".event-sidebar").animate({right: -380, height: 40, top: 600}, 1000);
+        EVENTS_NOT_EXPANDED = true;
+      }
+    });
+    
   }
+}
+
+function search(query) {
+  console.log("SEARCHING");
+  var matches = [];
+  var query_regex = new RegExp(query,"gi");
+  for(var i = 0; i < filtered_events.length; i++) {
+    matches.push([i,filtered_events[i].name.match(query_regex).length]);
+  }
+  console.log(matches);
+  matches = matches.sort(function (a,b) {
+    return a[1].length - b[1].length;
+  });
+  console.log(matches);
 }
