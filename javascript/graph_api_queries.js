@@ -36,20 +36,20 @@ function display_all_user_events() {
     $(d).data(id,{data:filtered_events[i]});
     
     var d1 = document.createElement("span");
-    d1.className = "results name";
+    d1.className = "name";
     $(d1).append(name);
-    var d2 = document.createElement("span");
-    d2.className = "results description";
-    $(d2).append(description);
+    //var d2 = document.createElement("span");
+    //d2.className = "description";
+    //$(d2).append(description);
     var d3 = document.createElement("span");
-    d3.className = "results location";
+    d3.className = "location";
     $(d3).append(loc);
     var d4 = document.createElement("span");
-    d4.className = "results date";
+    d4.className = "date";
     $(d4).append(((new Date(start_time)).toLocaleDateString()));
     
     $(d).append(d1);
-    $(d).append(d2);
+    //$(d).append(d2);
     $(d).append(d3);
     $(d).append(d4);
     

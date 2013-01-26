@@ -76,7 +76,7 @@ function login() {
     } else {
       // cancelled
     }
-  });
+  },{scope:'user_events,email'});
 }
 
 function getUserInfo(access_token) {
