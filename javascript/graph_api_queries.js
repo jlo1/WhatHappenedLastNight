@@ -4,10 +4,10 @@
    
 // Get all attendees of an event
 $.getJSON("https://graph.facebook.com/331218348435/invited?access_token=" + CURR_USER.access_token + "&callback=?", function(response) {
-      $(response.data).each(function() {
-        console.log(this.name);
-      });
-    });
+  $(response.data).each(function() {
+    console.log(this.name);
+  });
+});
     
     
     

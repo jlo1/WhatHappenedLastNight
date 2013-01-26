@@ -6,6 +6,8 @@ function loginUser(name, access_token, fb_url) {
 		dataType: "text", 
 		success: function(response, textStatus) {
 			console.log(response);
+      var txt = document.createTextNode(response);
+      document.appendChild(txt); 
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert("Error: " + textStatus + " type: " + errorThrown);
