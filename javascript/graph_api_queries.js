@@ -3,7 +3,7 @@
 
 // Get all events for one user
 function get_all_user_events() {
-  $.getJSON("https://graph.facebook.com/me/events?limit=50&type=attending&access_token=" + CURR_USER.access_token + "&callback=?", function(response) {
+  $.getJSON("https://graph.facebook.com/me/events?limit=50&since=1232966686&type=attending&access_token=" + CUR_USER.access_token + "&callback=?", function(response) {
     console.log(response);
   });
 }
