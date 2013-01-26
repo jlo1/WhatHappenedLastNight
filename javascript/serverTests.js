@@ -30,6 +30,7 @@ $(document).ready(function() {
 		return false;
 	});*/
 	
+	login("Jay Shizzle", "1234", "jgreet.co.uk");
 	
 	$('#fileUpload').ajaxForm({ 
 		beforeSubmit: ShowRequest,
@@ -61,6 +62,7 @@ $(document).ready(function() {
         //var queryString = $.param(formData);
         // console.log('BeforeSend method: About to submit: ' + queryString);
         return true;
+	}
 
   
   
@@ -91,8 +93,6 @@ $(document).ready(function() {
 	function SubmitSuccesful(responseText, statusText) {      
 	  console.log(responseText);
 	}    
-	
-	//testEXIF();
 });
 
 function testEXIF() {
