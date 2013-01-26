@@ -1,0 +1,90 @@
+
+#timeline {
+	position: absolute;
+	width: 95%;
+	height: 100px;
+	bottom: 25px;
+	margin: auto;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+	border: solid 2px #CCCCCC;
+	text-align: center;
+	overflow: hidden;
+}
+
+#timelineImgWrapper {
+	position: absolute;
+
+	height: 100%;
+	width: 100%;
+
+}
+
+#timelineImg {
+	position: absolute;
+	height: 100%;
+
+	background-image: url("../images/timeline_background.jpg");
+}
+
+#timelineImg .tlLabels {
+	position: absolute;
+	top: 20px;
+	left:100px;
+}
+
+
+#timelineImg .tlMarkers {
+	position: absolute;
+	top: 67px;
+	left: 120px;
+}
+
+#timelineImg .tlLabels p {
+	display: inline-block;
+	//padding: 0 55px 0 55px;
+	width: 200px;
+	font-size: 30px;
+	font-weight: bold;
+	color: #999999;
+}
+
+#slider {
+	position: absolute;
+	height: 100%;
+	width: 5px;
+	background-color: green;
+	display: inline-block;
+	margin: auto;
+	text-align: center;
+}
+
+.zoom {
+	position: relative;
+	top: 0px;
+	width: 30px;
+	height: 30px;
+	margin: 5px;
+	padding: 5px;
+	background-color: #999999;
+
+	cursor: pointer;
+}
+
+#timelineImg .tlMarkers .marker {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: white;
+	display: inline-block;
+	cursor: pointer;
+}
+#timelineImg .tlMarkers .marker .markerHover{
+	position: relative;
+	bottom: 10px;
+	left: 10px;
+	height: 10px;
+	width: 90px;
+	background-color: #AAAAAA;
+}
