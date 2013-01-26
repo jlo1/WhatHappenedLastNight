@@ -21,10 +21,23 @@ line-height:1;
 margin:0;
 }
 
+#Temp {
+float:left;
+width:70%;
+background:#9c9;
+}
+
+.upload {
+float:right;
+width:30%;
+height: 70%;
+background:#c9c;
+}
+
 body {
 margin:0;
 font-family:"Helvetica Neue", helvetica, sans-serif;
-font-size:14px;
+font-size:22px;
 color:#7d838b;
 background-color:#fff;
 background: rgb(28, 207, 99) url(../images/background-repeat.jpg);

@@ -1,3 +1,7 @@
+html {
+	background-image: url(../images/background-repeat.png);
+}
+
 div.page {
 	display: none;
 }
