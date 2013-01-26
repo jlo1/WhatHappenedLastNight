@@ -85,14 +85,10 @@ function getUserInfo(access_token) {
 }
 
 function handleFacebookResponse(response,access_token) {
-  userInfo = [response.name, response.link, response.username];
+  userInfo = [response.name, response.link];
 
   var id = loginUser(userInfo[0],access_token,userInfo[1]);
   
   // Updating the CUR_USER global
-  CUR_USER.access_token = access_token;
-  CUR_USER.id = id;
-  CUR_USER.access_token = access_token;
-  CUR_USER.username = userInfo[2];
-  CUR_USER.fb_url = userInfo[1];
+  CUR_USER = new User(id,access_token,userInfo[0],userInfo[1]);
 }
