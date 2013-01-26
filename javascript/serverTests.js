@@ -21,6 +21,7 @@ $(document).ready(function() {
 					console.log(this.name);
 				});
 			});
+
 	*/
 	/*$("#fileUpload").submit(function () {
 		console.log("HERE");
@@ -60,13 +61,34 @@ $(document).ready(function() {
         //var queryString = $.param(formData);
         // console.log('BeforeSend method: About to submit: ' + queryString);
         return true;
-    }
+
+  
+  
+  /* Get all the event data for event with id = 154212181397752
+  $.getJSON("https://graph.facebook.com/154212181397752/?access_token=" + 
+		"AAACEdEose0cBAIlxHBr7MEayBiCTtthpcjRS22sgdmAWeUbfZAuxIWKPkFNR59nfz2NILuZAU3eclVeOW1rvFgY0miJclOBZAdVxxZAZAZCAZDZD&callback=?", function(response) {
+				console.log(response);
+        id = response.id
+        start_time = response.start_time
+        end_time = response.end_time
+        description = response.description
+        title = response.name
+        creation_time = response.updated_time
+			});
+	*/
+  
+  /* Get the home photo of an event with id = 154212181397752
+  $.getJSON("https://graph.facebook.com/154212181397752/picture?access_token=" + 
+		"AAACEdEose0cBAIlxHBr7MEayBiCTtthpcjRS22sgdmAWeUbfZAuxIWKPkFNR59nfz2NILuZAU3eclVeOW1rvFgY0miJclOBZAdVxxZAZAZCAZDZD&callback=?", function(response) {
+				console.log(response.data.url);
+			});
+  */
 
 	function AjaxError() {
 	  alert("An AJAX error occured.");
 	}
 
-	function SubmitSuccesful(responseText, statusText) {        
+	function SubmitSuccesful(responseText, statusText) {      
 	  console.log(responseText);
 	}    
 	
