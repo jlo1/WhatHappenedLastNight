@@ -10,14 +10,23 @@ var Timeline = function(nodesArr, eventObj) {
 	//else you're in ItemsTimeline mode. eventsObj = Current event
 
 
-	this.setupTimeline();
 	this.zoomStr = ["Days", "Weeks", "Months", "Year"];
 	this.zoomScaleArr =	[00000003333333,	//3.3 = 1/30 * 100
 						 00000025000000,	//25  = 1month/4weeks * 100
 						 00000833333333,	//8.3 = 1/12 * 100
 						 00010000000000]	//1   = 1 year increment
 	this.currZoomInd = 2;		//index into zoomScaleArr -> changed in setupTimeline
+	this.maxZoomInd = 3;
 
+	this.timelineStart;
+	this.timelineEnd;
+	this.timelineMin;
+	this.timelineMax;
+	this.currMin;
+	this.currMax;
+
+
+	this.setupTimeline();
 /*
 	this.labelDays = ["Sunday", "Monday", "Tuesday", "Wednesday",
 				"Thursday", "Friday", "Saturday"];
@@ -29,32 +38,18 @@ var Timeline = function(nodesArr, eventObj) {
 
 
 Timeline.prototype.setupTimeline = function () {
-	//Properties created:
-	//	this.timelineStart, timelineEnd, timelineMin, timelineMax
-
 	//get the first event and last event start time, to know min/max
-	setStartEndTimelineEvents.bind(this)();
-	var tlDiff = this.timelineEnd - this.timelineStart;
-	if (tlDiff < 4*this.zoomScaleArr[0]) {		//less than 4 days, will show 4 days
-		this.currZoomInd = 0;
-	}
-	else if (tlDiff < 4*this.zoomScaleArr[1]) {	//less than 4 weeks, will show 4 weeks
-		this.currZoomInd = 1;
-	}
-	else if (tlDiff < 4*this.zoomScaleArr[2]) {	//less than 4 months, will show 4 months
-		this.currZoomInd = 2;
-	}
-	else {										//show 4 years
-		this.currZoomInd = 3;
-	}
+	setStartEndTimeline.bind(this)();		//timelineStart, timelineEnd
+	setMinMaxTimeline.bind(this)();			//timelineMin, timelineMax, currZoomInd
 
-	this.timelineMin = this.timelineStart - 2*this.zoomScaleArr[this.currZoomInd];
-	this.timelineMax = this.timelineEnd + 2*this.zoomScaleArr[this.currZoomInd];
+	var approxNumTiles = (this.timelineMax - this.timelineMin) /
+						this.zoomScaleArr[this.currZoomInd];
+    $("#timelineImg").css("width", Math.round(200*approxNumTiles));
 }
 
 
-
-function setStartEndTimelineEvents() {
+//First and last events' start time
+function setStartEndTimeline() {
 	if (this.nodesArr.length < 1) {
 		if(this.eventObj === undefined) {	//EventsTimeline
 			this.timelineStart = getScaledTime(getCurrentTime());
@@ -69,6 +64,29 @@ function setStartEndTimelineEvents() {
 	this.timelineEnd = this.nodesArr[this.nodesArr.length -1].scaledTime;
 }
 
+//sets min and max of timeline and currZoom
+function setMinMaxTimeline() {
+	var tlDiff = this.timelineEnd - this.timelineStart;
+	if (tlDiff < 4*this.zoomScaleArr[0]) {		//less than 4 days, will pad +/-2 days
+		this.maxZoomInd = 0;
+		this.currZoomInd = 0;
+	}
+	else if (tlDiff < 4*this.zoomScaleArr[1]) {	//less than 4 weeks, will pad +/-2 weeks
+		this.maxZoomInd = 1;
+		this.currZoomInd = 1;
+	}
+	else if (tlDiff < 4*this.zoomScaleArr[2]) {	//less than 4 months, will pad +/-2 months
+		this.maxZoomInd = 2;
+		this.currZoomInd = 2;
+	}
+	else {										//pad +/-2 years
+		this.maxZoomInd = 3;
+		this.currZoomInd = 3;
+	}
+
+	this.timelineMin = this.timelineStart - 2*this.zoomScaleArr[this.currZoomInd];
+	this.timelineMax = this.timelineEnd + 2*this.zoomScaleArr[this.currZoomInd];
+}
 
 function getCurrentTime() {
 	//returns yyyyMMdd000000
@@ -102,4 +120,41 @@ function getScaledTime(givenTime) {
 	scaledTime += Math.round( (givenSecond)/60 );
 
 	return scaledTime;
+}
+
+
+function initializeDraggableTimelineToMiddle(timelineMin, timelineMax, isEventsTimeline) {
+    var parentPos = $("#timelineNav").offset();
+    var childPos = $("#timelineImg").offset();
+
+    var img = $("#timelineImg").draggable({ containment: '#timelineImgWrapper'}),
+        h = img.height(),
+        w = img.width(),
+        outer = $('#timelineNav'),
+        oH = outer.height(),
+        oW = outer.width(),
+        iH = h + (h - oH),
+        iW = w + (w - oW),
+        iT = '-' + ((iH - oH)/2) + 'px',
+        iL = '-' + ((iW - oW)/2) + 'px';
+
+    $('#timelineImgWrapper').css({ width: iW, height: iH, top: iT, left: iL });
+
+
+    var leftPosToSetImgPos;
+    //FOR: EventsTimeline: Current date
+    if (isEventsTimeline) {
+    	var currScaledTime = getScaledTime(getCurrentTime());
+    	var ratio = (currScaledTime - timelineMin)/(timelineMax - timelineMin);
+    	leftPosToMakeMiddle = Math.round(w - oW - (ratio * w) + oW/2);
+    }
+    //FOR: ItemsTimeline: Go to beginning
+    else {
+    	leftPosToMakeMiddle = Math.round(w - oW);
+    }
+
+    if(leftPosToSetImgPos > w-oW) leftPosToSetImgPos = w-oW;
+    if (leftPosToSetImgPos < 0) leftPosToSetImgPos = 0;
+
+    $("#timelineImg").css({left: leftPosToMakeMiddle + 'px'});
 }

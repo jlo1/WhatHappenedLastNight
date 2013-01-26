@@ -22,10 +22,11 @@ body {
 	border: solid 1px #000000;
 }
 #timelineContent {
+	position: absolute;
 	margin: auto;
 	width: 90%;
-
-	height: 80%;
+	top: 0px;
+	bottom: 150px;
     box-sizing: border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
@@ -36,8 +37,10 @@ body {
 }
 
 #timelineNav {
+	position: absolute;
 	width: 90%;
-	height: 20%;
+	height: 100px;
+	bottom: 25px;
 	margin: auto;
     box-sizing: border-box;
     -moz-box-sizing:border-box;
@@ -45,5 +48,32 @@ body {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-	border: solid 1px #CCCCCC;
+	border: solid 2px #CCCCCC;
+	text-align: center;
+	overflow: hidden;
+}
+
+#timelineImgWrapper {
+	position: absolute;
+
+	height: 100%;
+	width: 100%;
+
+}
+
+#timelineImg {
+	position: absolute;
+	height: 100%;
+
+	background-image: url("../images/timeline_background.jpg");
+}
+
+#slider {
+	position: absolute;
+	height: 100%;
+	width: 5px;
+	background-color: green;
+	display: inline-block;
+	margin: auto;
+	text-align: center;
 }
