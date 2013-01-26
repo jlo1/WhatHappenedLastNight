@@ -1,4 +1,4 @@
-h1{
+#login-page h1{
 	margin-top: 12%;
 	margin-left: 30%;
 	font-size: 160px;
@@ -9,17 +9,17 @@ h1{
 
 }
 
-img{
+#login-page img{
 	float: left;
 }
 
-.colorLogo{
+#login-page .colorLogo{
 	height: 100px;
 	width: auto;
 	background-image: url(../images/Colored_logo.png);
 }
 
-#fb_login {
+#login-page #fb_login {
 	margin-top: 2%;
 	margin-left: 30%;
 font-family: font-family: 'Droid Serif', serif;
@@ -43,14 +43,14 @@ border-radius: 3px;
 box-shadow: rgba(255,255,255,0.2) 0 1px 0,inset rgba(255,255,255,0.2) 0 1px 0;
    }
 
-#fb_login:hover {
+#login-page #fb_login:hover {
 border: 1px solid #d72c3f;
    border-top-color: #d72c3f;
    background: #d72c3f;
    color: #fff;
    cursor: pointer;
    }
-#fb_login:active {
+#login-page #fb_login:active {
    border-top-color: #fb5500;
    background: #fb5500;
    }
