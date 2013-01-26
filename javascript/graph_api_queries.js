@@ -1,13 +1,16 @@
 /* Queries using the current user data and the Facebook Graph API to get
    information about events, users, etc. */
-   
-   
-// Get all attendees of an event
-/*$.getJSON("https://graph.facebook.com/331218348435/invited?access_token=" + CURR_USER.access_token + "&callback=?", function(response) {
-  $(response.data).each(function() {
-    console.log(this.name);
+
+// Get all events for one user
+function get_all_user_events() {
+  $.getJSON("https://graph.facebook.com/me/events?limit=50&type=attending&access_token=" + CURR_USER.access_token + "&callback=?", function(response) {
+    console.log(response);
   });
-});
+}
+
+function filter_events(query) {
+
+}
     
     
     
