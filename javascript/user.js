@@ -1,4 +1,4 @@
-var User = function(id, fb_tag, username, fb_url) {
+var User = function(id, access_token, username, fb_url) {
 	this.id = id;
 	this.access_token = access_token;
 	this.username = username;
