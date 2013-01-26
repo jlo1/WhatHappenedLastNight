@@ -97,4 +97,5 @@ function handleFacebookResponse(response,access_token) {
   CUR_USER = new User(id,access_token,userInfo[0],userInfo[1]);
   get_all_user_events();
   switchPages("party-page");
+  readUserEvents();
 }
