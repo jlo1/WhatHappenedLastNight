@@ -95,19 +95,41 @@ Timeline.prototype.setupTimeline = function () {
 }
 
 Timeline.prototype.createHtmlEltsLabels = function(approxNumTilesArr, zoomInd) {
+	
+	if(this.eventObj === undefined) {
+		this.createHtmlEventsPage(approxNumTilesArr, zoomInd);
+	}
+	else {
+		//this.createHtmlPartyPage(approxNumTilesArr, zoomInd);
+	}
+}
+
+Timeline.prototype.createHtmlPartyPage = function(approxNumTilesArr, zoomInd) {
+	var mrkObj = $(this.pageDiv + " .tlMarkers");
+	mrkObj.html("");
+	for(var j = 0; j < this.nodesArr.length; j++) {
+		var nodeTime = getFormatDate(this.nodesArr[j].s_time).getTime();
+		var diff = nodeTime - this.minDate.getTime();
+		var leftPos = Math.round(diff/factor * 200);
+
+		var marker = $("<div/>").addClass("marker").css("left", leftPos + "px");
+		marker.attr("id", "marker"+j);
+		marker.on("click", this.handleNodeClick.bind(this));
+		mrkObj.append(marker);
+	}
+}
+
+Timeline.prototype.createHtmlEventsPage = function(approxNumTilesArr, zoomInd) {
 	var i = 0;
-	//Year
-	//num = year number
 	var yearNum = this.minDate.getFullYear();
 	if (yearNum % 4 === 0) {
 		this.MonthDayNum[1] = 29;
 	}
-	var num, numTiles, lblObj;
+	var num, numTiles, lblObj, factor;
 	var mrkObj = $(this.pageDiv + " .tlMarkers");
 
 	lblObj = $(this.zoomStrIDs[zoomInd]);
 
-	var factor;
 	switch(zoomInd) {
 		case 0:
 			factor = 1000*60*60*24;
@@ -122,7 +144,6 @@ Timeline.prototype.createHtmlEltsLabels = function(approxNumTilesArr, zoomInd) {
 			factor = 365*1000*60*60*24;
 			break;
 	}
-
 	mrkObj.html("");
 	for(var j = 0; j < this.nodesArr.length; j++) {
 		var nodeTime = getFormatDate(this.nodesArr[j].s_time).getTime();
@@ -131,25 +152,8 @@ Timeline.prototype.createHtmlEltsLabels = function(approxNumTilesArr, zoomInd) {
 
 		var marker = $("<div/>").addClass("marker").css("left", leftPos + "px");
 		marker.attr("id", "marker"+j);
-/*
-		if(this.eventObj === undefined) {
-			var markerHoverInfo = $("<div/>").addClass("markerHover hidden");
-			markerHoverInfo.text(this.nodesArr[j].title);
-			marker.append(markerHoverInfo);
-
-			marker.hover(
-				function() {
-					markerHoverInfo.removeClass("hidden");},
-				function() {
-					markerHoverInfo.addClass("hidden");}
-			);
-		}
-*/
-
-
 		marker.on("click", this.handleNodeClick.bind(this));
 		mrkObj.append(marker);
-
 	}
 
 
@@ -237,7 +241,6 @@ Timeline.prototype.createHtmlEltsLabels = function(approxNumTilesArr, zoomInd) {
 		}
 	}
 }
-
 Timeline.prototype.zoomIn = function() {
 	if(this.currZoomInd <= 0) return;
 	var oldZInd = this.currZoomInd;
