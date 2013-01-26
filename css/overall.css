@@ -1,0 +1,7 @@
+div.page {
+	display: none;
+}
+
+div.page.active {
+	display: block;
+}
