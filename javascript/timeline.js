@@ -6,14 +6,24 @@ var Timeline = function(nodesArr, eventObj) {
 	
 	this.nodesArr = nodesArr;
 	this.eventObj = eventObj;
+	this.pageDiv;
+	if (this.eventObj === undefined) this.pageDiv = "#event-page";
+	else this.pageDiv = "#party-page";
 	//if this.eventObj === undefined, then in EventsTimeline mode
 	//else you're in ItemsTimeline mode. eventObj = Current event
 
-
-	this.zoomStrIDs = [	"#dayLabels",
-						"#weekLabels",
-						"#monthLabels",
-						"#yearLabels"];
+	if (eventObj === undefined) {
+		this.zoomStrIDs = [	"#event-page #dayLabels",
+							"#event-page #weekLabels",
+							"#event-page #monthLabels",
+							"#event-page #yearLabels"];
+	}
+	else {
+		this.zoomStrIDs = [	"#party-page #dayLabels",
+							"#party-page #weekLabels",
+							"#party-page #monthLabels",
+							"#party-page #yearLabels"];
+	}
 	this.zoomScaleArr =	[3333333,	//3.3 = 1/30 * 100
 						 25000000,	//25  = 1month/4weeks * 100
 						 833333333,	//8.3 = 1/12 * 100
@@ -72,6 +82,7 @@ Timeline.prototype.setupTimeline = function () {
 				break;
 			case 3:
 				approxNumTiles = Math.round(tlDiff/(oneDay*365)) + 2;
+				break;
 		}
 
 		this.approxNumTilesArr.push(approxNumTiles);
@@ -92,7 +103,7 @@ Timeline.prototype.createHtmlEltsLabels = function(approxNumTilesArr, zoomInd) {
 		this.MonthDayNum[1] = 29;
 	}
 	var num, numTiles, lblObj;
-	var mrkObj = $(".tlMarkers");
+	var mrkObj = $(this.pageDiv + " .tlMarkers");
 
 	lblObj = $(this.zoomStrIDs[zoomInd]);
 
@@ -368,14 +379,14 @@ function getScaledTime(givenTime) {
 
 Timeline.prototype.initializeDraggableTimelineToMiddle = function(approxNumTiles) {
 
-    $("#timelineImg").css("width", 200*approxNumTiles + "px");
-    var parentPos = $("#timelineNav").offset();
-    var childPos = $("#timelineImg").offset();
+    $(this.pageDiv + " #timelineImg").css("width", 200*approxNumTiles + "px");
+    var parentPos = $(this.pageDiv + " #timeline").offset();
+    var childPos = $(this.pageDiv + " #timelineImg").offset();
 
-    var img = $("#timelineImg").draggable({ containment: '#timelineImgWrapper'}),
+    var img = $(this.pageDiv + " #timelineImg").draggable({ containment: this.pageDiv + ' #timelineImgWrapper'}),
         h = img.height(),
         w = img.width(),
-        outer = $('#timelineNav'),
+        outer = $(this.pageDiv + ' #timeline'),
         oH = outer.height(),
         oW = outer.width(),
         iH = h + (h - oH),
@@ -383,7 +394,7 @@ Timeline.prototype.initializeDraggableTimelineToMiddle = function(approxNumTiles
         iT = '-' + ((iH - oH)/2) + 'px',
         iL = '-' + ((iW - oW)/2) + 'px';
 
-    $('#timelineImgWrapper').css({ width: iW, height: iH, top: iT, left: iL });
+    $(this.pageDiv + ' #timelineImgWrapper').css({ width: iW, height: iH, top: iT, left: iL });
 
 	this.createHtmlEltsLabels(this.approxNumTilesArr, this.currZoomInd);
 
@@ -409,9 +420,9 @@ Timeline.prototype.initializeDraggableTimelineToMiddle = function(approxNumTiles
 
 
 Timeline.prototype.adjustTimelinePosWithZoom = function(approxNumTiles) {
-	var oldLeft = parseInt($("#timelineImg").css("left"));
-	var oldw = parseInt($("#timelineImg").css("width"));
-	var oldoW = parseInt($('#timelineNav').css("width"));
+	var oldLeft = parseInt($(this.pageDiv + " #timelineImg").css("left"));
+	var oldw = parseInt($(this.pageDiv + " #timelineImg").css("width"));
+	var oldoW = parseInt($(this.pageDiv + ' #timeline').css("width"));
 
 
 	var ratio = (oldw - oldoW - oldLeft + oldoW/2)/oldw;
@@ -419,13 +430,13 @@ Timeline.prototype.adjustTimelinePosWithZoom = function(approxNumTiles) {
 	var offset = oldLeft *1 % 200; 
 
     $("#timelineImg").css("width", Math.round(200*approxNumTiles) + "px");
-    var parentPos = $("#timelineNav").offset();
-    var childPos = $("#timelineImg").offset();
+    var parentPos = $(this.pageDiv + " #timeline").offset();
+    var childPos = $(this.pageDiv + " #timelineImg").offset();
 
-    var img = $("#timelineImg").draggable({ containment: '#timelineImgWrapper'}),
+    var img = $(this.pageDiv + " #timelineImg").draggable({ containment: this.pageDiv + ' #timelineImgWrapper'}),
         h = img.height(),
         w = img.width(),
-        outer = $('#timelineNav'),
+        outer = $( this.pageDiv + ' #timeline'),
         oH = outer.height(),
         oW = outer.width(),
         iH = h + (h - oH),
@@ -433,7 +444,7 @@ Timeline.prototype.adjustTimelinePosWithZoom = function(approxNumTiles) {
         iT = '-' + ((iH - oH)/2) + 'px',
         iL = '-' + ((iW - oW)/2) + 'px';
 
-    $('#timelineImgWrapper').css({ width: iW, height: iH, top: iT, left: iL });
+    $( this.pageDiv + ' #timelineImgWrapper').css({ width: iW, height: iH, top: iT, left: iL });
 
 	this.createHtmlEltsLabels(this.approxNumTilesArr, this.currZoomInd);
 	var leftPosToSetImgPos = Math.round(w - oW - (ratio * w) + oW/2);
@@ -461,12 +472,12 @@ Timeline.prototype.adjustTimelinePosWithZoom = function(approxNumTiles) {
 
 Timeline.prototype.setSliderPos = function(centeredScaledTime) {
 
-    var w = $("#timelineImg").width();
-    var oW = $('#timelineNav').width();
+    var w = $(this.pageDiv + " #timelineImg").width();
+    var oW = $(this.pageDiv + ' #timeline').width();
 
 	//centeredScaledTime = time you want to position around
     if(centeredScaledTime > w-oW) centeredScaledTime = w-oW;
     if (centeredScaledTime < 0) centeredScaledTime = 0;
 
-    $("#timelineImg").css({left: centeredScaledTime + 'px'});
+    $(this.pageDiv + " #timelineImg").css({left: centeredScaledTime + 'px'});
 }

@@ -20,6 +20,7 @@ div.page.active {
 	top: 50px;
 	bottom: 0px;
 	width: 100%;
+	margin: auto;
 }
 
 
@@ -28,7 +29,7 @@ div.page.active {
 	margin: auto;
 	width: 95%;
 	top: 0px;
-	bottom: 150px;
+	bottom: 200px;
     box-sizing: border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
