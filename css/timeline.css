@@ -4,7 +4,10 @@
 	width: 95%;
 	height: 150px;
 	bottom: 25px;
-	margin: auto;
+	margin: 20px;
+    box-sizing: border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;

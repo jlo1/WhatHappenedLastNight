@@ -100,7 +100,7 @@ Timeline.prototype.createHtmlEltsLabels = function(approxNumTilesArr, zoomInd) {
 		this.createHtmlEventsPage(approxNumTilesArr, zoomInd);
 	}
 	else {
-		//this.createHtmlPartyPage(approxNumTilesArr, zoomInd);
+		this.createHtmlPartyPage(approxNumTilesArr, zoomInd);
 	}
 }
 
