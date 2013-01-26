@@ -5,3 +5,7 @@ div.page {
 div.page.active {
 	display: block;
 }
+
+header {
+  height:100px;
+}

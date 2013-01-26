@@ -67,7 +67,7 @@ function login() {
     if (response.authResponse) {
       // connected
 	  var access_token = FB.getAuthResponse()['accessToken'];
-      getUserInfo(access_token);
+    getUserInfo(access_token);
   
     } else {
       // cancelled
