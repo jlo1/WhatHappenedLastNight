@@ -18,3 +18,7 @@ MAX_NAV_SIZE = 500;
 
 /* Specify the name of the ID of the current page */
 CUR_NAV_ID = "login-page";
+
+CUR_NAV_NAME = "calendar";
+
+IN_LOGOUT = false;
