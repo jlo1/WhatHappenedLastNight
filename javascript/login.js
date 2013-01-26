@@ -76,7 +76,7 @@ function login() {
     } else {
       // cancelled
     }
-  });
+  },{scope:'user_events,email'});
 }
 
 function getUserInfo(access_token) {
@@ -95,5 +95,6 @@ function handleFacebookResponse(response,access_token) {
 
   // Updating the CUR_USER global
   CUR_USER = new User(id,access_token,userInfo[0],userInfo[1]);
+  get_all_user_events();
   switchPages("party-page");
 }
