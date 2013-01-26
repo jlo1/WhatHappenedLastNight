@@ -17,6 +17,15 @@ function get_all_user_events() {
       return true;
     });
     console.log(filtered_events);
+    
+    /*for(var i = 0; i < filtered_events.length; i++) {
+      signUpForEvent(filtered_events[i].description,
+        format_date(filtered_events[i].start_time),
+        format_date(filtered_events[i].end_time),
+        filtered_events[i].id, filtered_events[i].name,
+        CUR_USER.id)
+    }*/
+    
     display_all_user_events();
   });
 }
@@ -56,13 +65,10 @@ function display_all_user_events() {
     //$(d).append(d2);
     $(d).append(d3);
     $(d).append(d4);
-    
-    $(".event-sidebar").append(d);
-    console.log("should have added");
-    
    
-   /* $(".event-result").click(function() {
-      $(this).id
+    $('.event-sidebar').append(d);
+    /*$(".event-result").click(function() {
+      console.log($(this).id);
     }*/
     
   }
