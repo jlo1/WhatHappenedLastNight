@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>What Happened Last Night?</title>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<!--<link rel="stylesheet" href="css/jquery_ui.css">-->
+		<link rel="stylesheet" href="css/serverTests.css">
+		<!--<link rel="stylesheet" href="css/jquery_fileuploader.css">-->
+		
+		<script src="javascript/jquery_min.js" type="text/javascript"></script>
+		<script src="javascript/jquery_min.js" type="text/javascript"></script>
+		<script src="javascript/jquery_ui.js" type="text/javascript"></script>
+		<script src="javascript/jquery_form.js" type="text/javascript"></script>
+		<!--<script src="javascript/jquery_fileuploader.js" type="text/javascript"></script>-->
+		<!--<script src="javascript/binaryajax.js" type="text/javascript"></script>
+		<script src="javascript/exif.js" type="text/javascript"></script>-->
+		<script src="javascript/serverTests.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+		</script>
+
+	</head>
+	<body>
+    
+    <!-- Facebook SDK -->
+    <!--<div id="fb-root"></div>
+    <script>
+      // Additional JS functions here
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '279428165518892', // App ID
+          channelUrl : '//www.justingreet.com/whathappenedlastnight/channel.html', // Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : true  // parse XFBML
+        });
+
+        // Additional init code here
+        
+        FB.getLoginStatus(function(response) {
+          
+          // The response object contains authResponse which has
+          // accessToken, userID, etc.
+          
+          if (response.status === 'connected') {
+            console.log("connected");
+            // connected
+          } else if (response.status === 'not_authorized') {
+            console.log("not authorized");
+            // not_authorized
+            login();
+          } else {
+            console.log("not logged in");
+            // not_logged_in
+            login();
+          }
+        });
+
+      };
+      
+      // 
+      function login() {
+        FB.login(function(response) {
+            if (response.authResponse) {
+              // connected
+              testAPI();
+            } else {
+              // cancelled
+            }
+        });
+      }
+      
+      function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+            console.log('Good to see you, ' + response.name + '.');
+        });
+      }
+      
+      // Load the SDK Asynchronously
+      (function(d){
+         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         ref.parentNode.insertBefore(js, ref);
+       }(document));
+    </script>-->
+    <!-- End Facebook SDK -->
+    
+    
+	<!--	<p id="button">click me</p>
+		<p id="stuff">Hey there cubscout.</p>-->
+		<!--<form action="http://www.justingreet.com/WhatHappenedLastNight/php/uploadImage.php" method="post" enctype="multipart/form-data">
+			<input type="file" name="file" class="fileUpload" multiple>
+			 
+			<button id="px-submit" type="submit">Upload</button>
+			<button id="px-clear" type="reset">Clear</button>
+		</form>-->
+		<p id="f1_upload_process">Loading...</p>
+		<!--target="upload_target"-->
+		<form id="fileUpload" action="http://www.justingreet.com/WhatHappenedLastNight/php/uploadImage.php" name="imageUploading" method="post" enctype="multipart/form-data" target="_blank" > 
+			File: <input name="myfile" type="file" id="fileVal"/>
+			<input id="submitButton" type="submit" name="submitBtn" value="Upload" />
+		</form>
+ 
+		<iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>                 
+	</body>
+</html>
