@@ -17,6 +17,7 @@ function get_all_user_events() {
       return true;
     });
     console.log(filtered_events);
+    display_all_user_events();
   });
 }
 
@@ -59,17 +60,10 @@ function display_all_user_events() {
     $(".event-sidebar").append(d);
     console.log("should have added");
     
-    
-    $(".event-sidebar").click(function() {
-      if (EVENTS_NOT_EXPANDED) {
-        $(".event-sidebar").animate({right: 0, height: 400, top: 200}, 1000);
-        EVENTS_NOT_EXPANDED = false;
-      }
-      else {
-        $(".event-sidebar").animate({right: -380, height: 40, top: 600}, 1000);
-        EVENTS_NOT_EXPANDED = true;
-      }
-    });
+   
+   /* $(".event-result").click(function() {
+      $(this).id
+    }*/
     
   }
 }
