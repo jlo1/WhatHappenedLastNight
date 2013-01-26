@@ -21,7 +21,27 @@ $(document).ready(function() {
 					console.log(this.name);
 				});
 			});
+  /*
+  
+  /* Get all the event data for event with id = 154212181397752
+  $.getJSON("https://graph.facebook.com/154212181397752/?access_token=" + 
+		"AAACEdEose0cBAIlxHBr7MEayBiCTtthpcjRS22sgdmAWeUbfZAuxIWKPkFNR59nfz2NILuZAU3eclVeOW1rvFgY0miJclOBZAdVxxZAZAZCAZDZD&callback=?", function(response) {
+				console.log(response);
+        id = response.id
+        start_time = response.start_time
+        end_time = response.end_time
+        description = response.description
+        title = response.name
+        creation_time = response.updated_time
+			});
 	*/
+  
+  /* Get the home photo of an event with id = 154212181397752
+  $.getJSON("https://graph.facebook.com/154212181397752/picture?access_token=" + 
+		"AAACEdEose0cBAIlxHBr7MEayBiCTtthpcjRS22sgdmAWeUbfZAuxIWKPkFNR59nfz2NILuZAU3eclVeOW1rvFgY0miJclOBZAdVxxZAZAZCAZDZD&callback=?", function(response) {
+				console.log(response.data.url);
+			});
+  */
 	
 	$('#fileUpload').ajaxForm({                 
             beforeSubmit: ShowRequest,
