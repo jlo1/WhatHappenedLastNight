@@ -1,4 +1,4 @@
-var window.onload = function() {
+
 	var Timeline = function(nodesArr, eventObj) {
 		//eventObj is OPTIONAL argument ONLY NEEDED FOR WITHIN AN EVENT
 			//(ie: ItemsNodes)
@@ -485,4 +485,3 @@ var window.onload = function() {
 		$(this.pageDiv + " #timelineImg").css({left: centeredScaledTime + 'px'});
 	}
 	
-}
