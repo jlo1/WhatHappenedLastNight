@@ -5,9 +5,7 @@ function loginUser(name, access_token, fb_url) {
 		data: {name: name, fb_url: fb_url, access_token: access_token},
 		dataType: "text", 
 		success: function(response, textStatus) {
-      var txt = document.createTextNode(response);
-      document.appendChild(txt); 
-			//console.log(response);
+			console.log("Response is (drum roll...) " + response);
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert("Error: " + textStatus + " type: " + errorThrown);
@@ -68,16 +66,8 @@ function login() {
     console.log(response);
     if (response.authResponse) {
       // connected
-      var access_token = FB.getAuthResponse()['accessToken'];
-      var userInfo = getUserInfo();
-      var id = loginUser(userInfo[0],access_token,userInfo[1]);
-      
-      // Updating the CUR_USER global
-      CUR_USER.access_token = access_token;
-      CUR_USER.id = id;
-	    CUR_USER.access_token = access_token;
-	    CUR_USER.username = userInfo[2];
-      CUR_USER.fb_url = userInfo[1];
+	  var access_token = FB.getAuthResponse()['accessToken'];
+      getUserInfo(access_token);
   
     } else {
       // cancelled
@@ -85,10 +75,24 @@ function login() {
   });
 }
 
-function getUserInfo() {
+function getUserInfo(access_token) {
   console.log('Welcome!  Fetching your information.... ');
+  
   FB.api('/me', function(response) {
-    console.log('Good to see you, ' + response.name + '.');
-    return [response.name, response.link, response.username];
+    handleFacebookResponse(response,access_token);
+	console.log('Good to see you, ' + response.name + '.');
   });
+}
+
+function handleFacebookResponse(response,access_token) {
+  userInfo = [response.name, response.link, response.username];
+
+  var id = loginUser(userInfo[0],access_token,userInfo[1]);
+  
+  // Updating the CUR_USER global
+  CUR_USER.access_token = access_token;
+  CUR_USER.id = id;
+  CUR_USER.access_token = access_token;
+  CUR_USER.username = userInfo[2];
+  CUR_USER.fb_url = userInfo[1];
 }
