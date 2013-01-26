@@ -32,7 +32,7 @@
 </Events> */
 
 	/* First get the variables passed to the function */
-	$user_id = $_POST["user_id"];
+	$user_id = intval($_POST["user_id"]);
 	
 	/* db info */
 	$hostname = "db452350691.db.1and1.com";

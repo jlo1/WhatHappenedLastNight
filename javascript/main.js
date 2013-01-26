@@ -72,7 +72,9 @@ $(document).ready(function() {
 	});
 	
 	$("#noteButton").click(function() {
-		
+		sendNewComment(1,2,$("#noteArea").val(),$("#timeForNote").val());
+		$("#addNote").animate({right: -380, height: 40, top: 600}, 1000);
+		NOTE_NOT_EXPANDED = true;
 	});
 	
 	/* Format what happens when the form should be submitted */

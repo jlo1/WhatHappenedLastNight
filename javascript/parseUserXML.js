@@ -1,16 +1,18 @@
-function readUserEvents() {
+function readUserEventsJobe() {
 	user_id = CUR_USER.id;
 	$.ajax({
 		url: "http://www.justingreet.com/WhatHappenedLastNight/php/readEventsForUser.php",
 		type: "post",
 		data: {user_id: user_id},
-		dataType: "xml", 
+		dataType: "text", 
 		async: false,
 		success: function(response, textStatus) {
+			//console.log(response);
 			parseHugeXML(response);
 		},
 		error: function(jqXHR, textStatus, errorThrown){
-			alert("Error: " + textStatus + " type: " + errorThrown);
+			//alert("Error: " + textStatus + " type: " + errorThrown);
+			console.log("AJAX ERROR!");
 			console.log(textStatus);
 			console.log(jqXHR.statusText);
 		}
@@ -44,6 +46,9 @@ function parseHugeXML(response) {
 			images.push(new Item(item_id, event_id, poster_username, time_created, is_image, contents, comments));
 		});
 		allEvents.push(new Event(event_id, title, description, s_time, e_time, fb_event_id, home_image, images));
+		
+		EVENT_TIMELINE = new Timeline(allEvents);
 	});
-	console.log(allEvents);
+	//console.log(allEvents);
+	
 }
