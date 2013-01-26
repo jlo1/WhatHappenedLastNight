@@ -53,7 +53,7 @@ function updateTimeTaken(item_id, time_taken) {
 	});
 }
 
-function readUserEvents(user_id) {
+/*function readUserEvents(user_id) {
 	$.ajax({
 		url: "http://www.justingreet.com/WhatHappenedLastNight/php/readEventsForUser.php",
 		type: "post",
@@ -68,7 +68,7 @@ function readUserEvents(user_id) {
 			console.log(jqXHR.statusText);
 		}
 	});
-}
+}*/
 
 function readEventIDs(user_id) {
 	var allIDs = [];
