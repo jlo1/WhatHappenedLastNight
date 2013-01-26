@@ -4,7 +4,6 @@
 	$s_time = "\"" . $_POST["start_time"] . "\"";
 	$e_time = "\"" . $_POST["end_time"] . "\"";
 	$fb_event_id = "\"" . $_POST["fb_event_id"] . "\"";
-	echo("fb_event_id: " . $fb_event_id);
 	$title = "\"" . $_POST["title"] . "\"";
 	$user_id = $_POST["user_id"];
 	
@@ -32,7 +31,6 @@
 	$login_success = mysql_query($login_entry, $link);
 	$num_results = mysql_num_rows($login_success);
 	if ($num_results > 0) {
-		echo("num results greater 0\n");
 		$id_entry = "SELECT event_id FROM event WHERE facebook_event_id = " . $fb_event_id;
 		$id_success = mysql_query($id_entry, $link);
 		while ($row = mysql_fetch_array($id_success)) {
@@ -40,9 +38,7 @@
 		}	
 	}
 	else {
-		echo("num results 0\n");
 		$register_entry = "INSERT INTO event VALUES(NULL, " . $descr . ", " . $s_time . ", " . $e_time . ", " . $fb_event_id . ", NULL, " . $title . ")";
-		echo("register entry: " . $register_entry . "\n");
 		$register_success = mysql_query($register_entry, $link);
 		$eventID = mysql_insert_id();
 	}
