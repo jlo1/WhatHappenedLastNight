@@ -3,20 +3,19 @@
 
 // Get all events for one user
 function get_all_user_events() {
-  $.getJSON("https://graph.facebook.com/me/events?limit=50&since=1232966686&type=attending&access_token=" + CUR_USER.access_token + "&callback=?", function(response) {
-    console.log(response);
+  $.getJSON("https://graph.facebook.com/me/events?fields=name,description,start_time,end_time,location&limit=50&since=1232966686&type=attending&access_token=" + CUR_USER.access_token + "&callback=?", function(response) {
+    var all_events = response;
+    var current_events = readEventIDs(parseInt(4));
+    console.log(current_events);
+    var filtered_events = [];
+    filtered_events = all_events.data.filter(function (e) {
+      for(ev in current_events) {
+        if(current_events[ev] == e.id) {
+          return false;
+        }
+      }
+      return true;
+    });
+    console.log(filtered_events);
   });
 }
-
-function filter_events(query) {
-
-}
-    
-    
-    
-    /* Get events the current user is attending, if not listed, run getJSON on the "next" pagination field
-    $.getJSON("https://graph.facebook.com/me/events/attending?access_token=" + 
-		"AAACEdEose0cBAJG9ZA3xmcpxZC5x4gJwJzwKyyJlAze1ZAII2P83o85pQE60uiZCLUSL6weZCtrXZCKmYlSgcqU95L16ZBSZARPa3a3UMg2DzQZDZD&callback=?", function(response) {
-					console.log(response);
-			});
-*/
