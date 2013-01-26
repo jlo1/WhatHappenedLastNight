@@ -8,10 +8,10 @@
   
   <!-- CSS -->
   <link href="css/reset.css" rel="stylesheet" type="text/css">
+  <link href="css/events.css" rel="stylesheet" type="text/css">
   <link href="css/overall.css" rel="stylesheet" type="text/css">
   <link href="css/login.css" rel="stylesheet" type="text/css">
   <link href="css/navbar.css" rel="stylesheet" type="text/css">
-  <link href="css/shreepal.css" rel="stylesheet" type="text/css">
   <link href="css/sidebarButtons.css" rel="stylesheet" type="text/css">
 
   
@@ -93,7 +93,7 @@
       <div class="sidebar">
 		<p>YOU'RE A SILLY EVENTS PAGE</p>
 		
-		<div class="events-to-add">
+		<div class="event-sidebar">
 		
 		</div>
 		
@@ -112,11 +112,26 @@
 		</div>
 		  
 		<div class="sidebar"> 
+			<div id="addNote">
+				<div class="visiblePart">
+					<p>Note</p>
+				</div>
+				<div id="noteInfo">
+					<textarea placeholder = "Add you note!" rows="10" cols="10" id="noteArea"></textarea>
+					<input placeholder = "Time for comment (YYMMDD HHMMSS)" id="timeForNote" type="text"/>
+					<input id="noteButton" type="button">Add note</button>
+				</div>
+			</div>
 			<div id="uploadImage">
 				<div class="visiblePart">
-					<p>Upload</p>
+					<p>Image</p>
 				</div>
-				<p>Browse Files</p>
+				<div id="uploadDeets">
+					<form id="fileUpload" action="http://www.justingreet.com/WhatHappenedLastNight/php/submitNewItem.php" name="imageUploading" method="post" enctype="multipart/form-data" target="_blank"> 
+						<input name="myfile" type="file" id="fileVal"/>
+						<input id="submitButton" type="submit" name="submitBtn" value="Upload" />
+					</form>
+				</div>
 			</div>
 		</div>
 		  

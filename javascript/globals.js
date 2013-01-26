@@ -1,6 +1,6 @@
 /* When the user submits an item, if it is an image this is true. 
  * If it is a note, this is false */
-IS_IMAGE = false;
+IS_IMAGE = true;
 
 /* Store the object that contains information about the user currently logged in */
 CUR_USER = {id: 564};
@@ -22,3 +22,7 @@ CUR_NAV_ID = "login-page";
 CUR_NAV_NAME = "calendar";
 
 IN_LOGOUT = false;
+
+IMAGE_NOT_EXPANDED = true;
+
+NOTE_NOT_EXPANDED = true;

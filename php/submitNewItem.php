@@ -43,7 +43,7 @@
 	}
 	/* If there's an image, we need to store it on the server and get the time it was created */
 	else {
-		echo("About to process image");
+		//echo("About to process image");
 		//This is the folder the image should be placed in
 		$destination_path = getcwd().DIRECTORY_SEPARATOR . "imageUploads" . DIRECTORY_SEPARATOR;
  
@@ -57,12 +57,15 @@
 	
 		//Actually upload the file
 		if(@move_uploaded_file($tempFileName, "imageUploads" . DIRECTORY_SEPARATOR . strval($new_item_id) . ".jpg")) {
-			echo("Uploaded the file\n");
 		}
 		
 		/* set the home image if this is the first one for the event */
 		$home_entry = "UPDATE event SET home_image = \"http://www.justingreet.com/WhatHappenedLastNight/php/imageUploads/" . strval($new_item_id) . ".jpg\" WHERE event_id = " . $eventID . " AND home_image IS NULL";
 		$home_result = mysql_query($home_entry, $link);
+		
+		if (!$home_result) {
+			die("Error updating home image source");
+		}
 		
 		//Get the time the photo was originally taken 
 		//echo("Original date time: " . $exif_ifdo['DateTime']);
