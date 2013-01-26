@@ -4,22 +4,38 @@ $(document).ready(function() {
 	});
 	
 	$(".navBar ul li").bind("click", function() {
-		$(".navBar ul li").animate({maxWidth: 200}, 500);
-		$(this).animate({maxWidth: MAX_NAV_SIZE}, 1000);
-		
-		var newID = $(this).attr("class"); 
-		switch(newID)
-			{
-			case "calendar":
-			  switchPages("event-page");
-			  break;
-			case "nights":
-			  switchPages("party-page");
-			  break;
-			//Case logout
-			default:
-			  //Do SOmething special
-			}
+		if (!IN_LOGOUT) {
+			$(".navBar ul li").animate({maxWidth: 200}, 500);
+			$(this).animate({maxWidth: MAX_NAV_SIZE}, 1000);
+			
+			var newID = $(this).attr("class"); 
+			switch(newID)
+				{
+				case "calendar":
+				  switchPages("event-page");
+				  CUR_NAV_NAME = "calendar";
+				  break;
+				case "nights":
+				  switchPages("party-page");
+				  CUR_NAV_NAME = "nights";
+				  break;
+				//Case logout
+				default:
+				  //Do SOmething special
+				}
+		}
+		IN_LOGOUT = false;
+	});
+	
+	$("#yesLogout").click(function() {
+		switchPages("login-page");
+	});
+	
+	$("#noLogout").click(function() {
+		IN_LOGOUT = true;
+		$(".logout").animate({maxWidth: 200}, 500);
+		var newDest = "." + CUR_NAV_NAME;
+		$(newDest).animate({maxWidth: MAX_NAV_SIZE}, 1000);
 	});
 });
 

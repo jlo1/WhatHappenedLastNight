@@ -1,0 +1,17 @@
+#uploadImage {
+	font-family: 'Open Sans';
+	font-size: 27px;
+	height: 120px;
+	width: 300px;
+	background-color: blue;
+	overflow: hidden;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	display: inline-block;
+}
+
+#uploadImage .visiblePart, #uploadImage p {
+	display: inline-block;
+}
+
