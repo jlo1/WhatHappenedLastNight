@@ -1,5 +1,6 @@
 .navBar{
 	background-color: #d72c3f;
+	height: 45px;
 }
 
 .navBar h3{
@@ -11,4 +12,29 @@
 	padding-right: 20px;
 	display: inline-block;
 	font-size: 40px;
+	width: 500px;
+	height: 45px;
+	max-width: 200px;
+	overflow: hidden;
 }
+
+.navBar ul li #logoutConfirm {
+	font-size: 30px;
+}
+
+.calendar {
+	background-color: #FB5500;
+}
+
+.nights {
+	background-color: #A3C8D1;
+}
+
+.logout {
+	background-color: #C74948;
+}
+
+div.hideMe {
+	display:none;
+}
+	
